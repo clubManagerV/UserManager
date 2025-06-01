@@ -1,7 +1,11 @@
 package de.club.usermanager.core.dto;
 
+import de.club.usermanager.adapter.persistence.enties.UserRole;
+
+
 public class UserDto {
 
+    private Long id;
 
     private String firstName;
 
@@ -57,5 +61,12 @@ public class UserDto {
 
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 }

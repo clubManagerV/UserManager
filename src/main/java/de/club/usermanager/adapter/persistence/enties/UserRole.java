@@ -1,11 +1,11 @@
-package de.club.usermanager.core.dto;
+package de.club.usermanager.adapter.persistence.enties;
 
 public enum UserRole {
 
-    USER(0 ),
-    ADMIN_USER(1),
-    SUPER_ADMIN_USER(2 ),
-    MANAGER(3 );
+    USER(0),
+    MANAGER(1),
+    ADMIN_USER(2),
+    SUPER_ADMIN_USER(3);
 
     private final int role;
 

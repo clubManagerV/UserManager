@@ -1,10 +1,10 @@
-package de.club.usermanager.core.dto;
+package de.club.usermanager.adapter.persistence.enties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class AddressDto {
+public class Address {
 
     @Id
     private Long id;
