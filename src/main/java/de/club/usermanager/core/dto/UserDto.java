@@ -1,6 +1,6 @@
-package de.club.usermanager.model;
+package de.club.usermanager.core.dto;
 
-public class User {
+public class UserDto {
 
 
     private String firstName;
@@ -14,7 +14,7 @@ public class User {
     private UserRole userRole;
 
 
-    public User() {
+    public UserDto() {
 
     }
 
