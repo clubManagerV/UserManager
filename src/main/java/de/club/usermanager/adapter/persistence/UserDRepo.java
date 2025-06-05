@@ -8,7 +8,8 @@ import de.club.usermanager.core.outport.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
+import java.util.Random;
+
 
 @Component
 public class UserDRepo implements UserRepo {
@@ -31,12 +32,20 @@ public class UserDRepo implements UserRepo {
 
     private  User getUserFromDto(UserDto userdto) {
         User user = new User();
-        user.setId( user.getId() == null ? UUID.randomUUID().node() : user.getId());
+        user.setFirstName(userdto.getFirstName());
+        user.setLastName(userdto.getLastName());
+        user.setEmail(userdto.getEmail());
+        user.setPassword(userdto.getPassword());
+        user.setMemberNumber(3 + new Random().nextInt(10));
+
         return user;
     }
 
     private UserDto convertUserToUserDto(User user) {
         UserDto userDto = new UserDto();
+        userDto.setFirstName(user.getFirstName());
+        userDto.setLastName(user.getLastName());
+        userDto.setEmail(user.getEmail());
         return userDto;
     }
 }
