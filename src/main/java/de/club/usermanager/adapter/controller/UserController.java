@@ -2,11 +2,13 @@ package de.club.usermanager.adapter.controller;
 
 import de.club.usermanager.core.dto.UserDto;
 import de.club.usermanager.core.outport.UserService;
+import de.club.usermanager.feign.ieventservice.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static de.club.usermanager.adapter.persistence.enties.UserRole.USER;
@@ -16,11 +18,13 @@ public class UserController {
 
 
 private final UserService userService;
+private final IEventService ieventService;
 
 @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, IEventService ieventService) {
         this.userService = userService;
-    }
+    this.ieventService = ieventService;
+}
 
 
     @PostMapping(
@@ -32,6 +36,13 @@ private final UserService userService;
         UserDto userDto = userService.createUser(convertUserMapperToUserDto(userMapper));
         return ResponseEntity.ok(convertUserDtoToUserMapper(userDto));
     }
+
+    @PostMapping(path = "userSubscribeEvent")
+    public ResponseEntity<Boolean> addEventUser(@RequestParam long userId, @RequestParam long eventId) {
+        return ResponseEntity.ok(ieventService.addEventTUser(userId, eventId));
+    }
+
+
 
 
 

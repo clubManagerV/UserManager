@@ -3,6 +3,7 @@ package de.club.usermanager.adapter.persistence.enties;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "USERS", uniqueConstraints = {})
@@ -12,6 +13,7 @@ public class User extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
+
     @Column(name = "FIRSTNAME")
     private String firstName;
 
@@ -38,9 +40,19 @@ public class User extends BaseEntity{
     @JoinColumn(name = "USER_ROLE")
     private UserRole role;
 
-
     @Column(name = "PHONE_NUMBER")
     private long phoneNumber;
+
+    @ElementCollection
+    private List<Integer> eventIds;
+
+    public List<Integer> getEventIds() {
+        return eventIds;
+    }
+
+    public void setEventIds(List<Integer> eventIds) {
+        this.eventIds = eventIds;
+    }
 
     public void setId(Long id) {
         this.id = id;
