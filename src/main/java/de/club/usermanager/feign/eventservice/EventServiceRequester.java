@@ -1,6 +1,6 @@
-package de.club.usermanager.feign;
+package de.club.usermanager.feign.eventservice;
 
-import de.club.usermanager.feign.ieventservice.IEventService;
+import de.club.usermanager.feign.eventservice.ieventservice.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

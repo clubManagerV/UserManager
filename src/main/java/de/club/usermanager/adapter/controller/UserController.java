@@ -2,7 +2,7 @@ package de.club.usermanager.adapter.controller;
 
 import de.club.usermanager.core.dto.UserDto;
 import de.club.usermanager.core.outport.UserService;
-import de.club.usermanager.feign.ieventservice.IEventService;
+import de.club.usermanager.feign.eventservice.ieventservice.IEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package de.club.usermanager.feign.ieventservice;
+package de.club.usermanager.feign.eventservice.ieventservice;
 
 public interface IEventService {
 
