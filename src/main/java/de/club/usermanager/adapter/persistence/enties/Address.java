@@ -1,38 +1,61 @@
 package de.club.usermanager.adapter.persistence.enties;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "ADDRESSE", uniqueConstraints = {})
 public class Address {
 
     @Id
+    @Column(name = "ADDRESS_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String street;
+    @Column(name = "STREET_NAME")
+    private String streetName;
 
-    private String streetNumber;
-
+    @Column(name = "STREET_NUMBER")
+    private long streetNumber;
+    @Column(name = "ZIPCODE")
+    private long zip;
+    @Column(name = "CITY")
     private String city;
 
-    private String zipCode;
 
+    @Column(name = "COUNTRY")
     private String country;
 
-    public String getStreetNumber() {
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public long getStreetNumber() {
         return streetNumber;
     }
 
-    public void setStreetNumber(String streetNumber) {
+    public void setStreetNumber(long streetNumber) {
         this.streetNumber = streetNumber;
     }
 
-    public String getStreet() {
-        return street;
+    public long getZip() {
+        return zip;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    public void setZip(long zip) {
+        this.zip = zip;
     }
 
     public String getCity() {
@@ -43,27 +66,11 @@ public class Address {
         this.city = city;
     }
 
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
     public String getCountry() {
         return country;
     }
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 }

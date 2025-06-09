@@ -37,7 +37,7 @@ public class UserDRepo implements UserRepo {
         user.setEmail(userdto.getEmail());
         user.setPassword(userdto.getPassword());
         user.setMemberNumber(3 + new Random().nextInt(10));
-
+        user.setRole(userdto.getUserRole());
         return user;
     }
 

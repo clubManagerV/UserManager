@@ -9,11 +9,6 @@ import java.util.List;
 @Table(name = "USERS", uniqueConstraints = {})
 public class User extends BaseEntity{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
-    private Long id;
-
     @Column(name = "FIRSTNAME")
     private String firstName;
 
@@ -54,13 +49,6 @@ public class User extends BaseEntity{
         this.eventIds = eventIds;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public String getFirstName() {
         return firstName;
