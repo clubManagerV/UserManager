@@ -1,0 +1,17 @@
+name: Run UnitTest
+
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: get code from repo
+        uses: actions/checkout@v4
+
+      - name: install java temurin
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '21'
+      - name: install all dependencies
+        run: mvn clean install
