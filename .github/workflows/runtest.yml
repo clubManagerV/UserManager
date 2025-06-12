@@ -29,5 +29,8 @@ jobs:
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '21'
-      - name: install all dependencies
+          cache: maven
+      - name: build with maven
+        run: mvn -B package --file pom.xml
+      - name: run Unit Test
         run: mvn clean install --file pom.xml
