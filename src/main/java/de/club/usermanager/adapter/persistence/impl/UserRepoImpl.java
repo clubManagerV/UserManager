@@ -1,4 +1,4 @@
-package de.club.usermanager.adapter.persistence;
+package de.club.usermanager.adapter.persistence.impl;
 
 import de.club.usermanager.adapter.persistence.enties.User;
 import de.club.usermanager.adapter.persistence.repositories.AddressRepository;
