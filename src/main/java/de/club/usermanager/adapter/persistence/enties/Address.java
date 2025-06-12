@@ -16,11 +16,12 @@ public class Address {
 
     @Column(name = "STREET_NUMBER")
     private long streetNumber;
+
     @Column(name = "ZIPCODE")
-    private long zip;
+    private long zipCode;
+
     @Column(name = "CITY")
     private String city;
-
 
     @Column(name = "COUNTRY")
     private String country;
@@ -50,12 +51,12 @@ public class Address {
         this.streetNumber = streetNumber;
     }
 
-    public long getZip() {
-        return zip;
+    public long getZipCode() {
+        return zipCode;
     }
 
-    public void setZip(long zip) {
-        this.zip = zip;
+    public void setZipCode(long zip) {
+        this.zipCode = zip;
     }
 
     public String getCity() {

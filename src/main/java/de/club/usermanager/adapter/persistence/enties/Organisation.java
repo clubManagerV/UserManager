@@ -18,6 +18,5 @@ public class Organisation  extends BaseEntity {
 
 
     @OneToMany(mappedBy= "organisation")
-   // @JoinColumn(name = "ASSOCIATION_ID", referencedColumnName = "id")
     private Set<Association> association;
 }

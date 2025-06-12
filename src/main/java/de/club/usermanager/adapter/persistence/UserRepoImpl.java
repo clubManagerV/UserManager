@@ -12,13 +12,13 @@ import java.util.Random;
 
 
 @Component
-public class UserDRepo implements UserRepo {
+public class UserRepoImpl implements UserRepo {
 
     private final UserRepository userRepository;
     private final AddressRepository addressRepository;
 
     @Autowired
-    public UserDRepo(UserRepository userRepository, AddressRepository addressRepository) {
+    public UserRepoImpl(UserRepository userRepository, AddressRepository addressRepository) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
     }

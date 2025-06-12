@@ -1,4 +1,4 @@
-package de.club.usermanager.adapter.controller;
+package de.club.usermanager.adapter.controller.mapper;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

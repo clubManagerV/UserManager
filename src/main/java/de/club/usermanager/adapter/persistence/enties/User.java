@@ -41,6 +41,7 @@ public class User extends BaseEntity{
     @ElementCollection
     private List<Integer> eventIds;
 
+
     public List<Integer> getEventIds() {
         return eventIds;
     }

@@ -1,5 +1,6 @@
 package de.club.usermanager.adapter.controller;
 
+import de.club.usermanager.adapter.controller.mapper.UserMapper;
 import de.club.usermanager.core.dto.UserDto;
 import de.club.usermanager.core.outport.UserService;
 import de.club.usermanager.feign.eventservice.ieventservice.IEventService;
