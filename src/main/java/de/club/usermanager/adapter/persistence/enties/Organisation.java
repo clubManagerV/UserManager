@@ -19,4 +19,28 @@ public class Organisation  extends BaseEntity {
 
     @OneToMany(mappedBy= "organisation")
     private Set<Association> association;
+
+    public String getOrganisationName() {
+        return organisationName;
+    }
+
+    public void setOrganisationName(String organisationName) {
+        this.organisationName = organisationName;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Association> getAssociation() {
+        return association;
+    }
+
+    public void setAssociation(Set<Association> association) {
+        this.association = association;
+    }
 }
