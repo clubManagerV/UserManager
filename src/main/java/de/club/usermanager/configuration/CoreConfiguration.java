@@ -1,7 +1,12 @@
 package de.club.usermanager.configuration;
 
 
-import de.club.usermanager.core.outport.*;
+import de.club.usermanager.core.port.in.AssociationService;
+import de.club.usermanager.core.port.in.OrganisationService;
+import de.club.usermanager.core.port.in.UserService;
+import de.club.usermanager.core.port.out.AssociationRepo;
+import de.club.usermanager.core.port.out.OrganisationRepo;
+import de.club.usermanager.core.port.out.UserRepo;
 import de.club.usermanager.core.services.ServiceAssociationImpl;
 import de.club.usermanager.core.services.ServiceOrganisationImpl;
 import de.club.usermanager.core.services.ServiceUserImpl;
@@ -23,8 +28,8 @@ public class CoreConfiguration {
     }
 
     @Bean
-    public AssociationService associationService(AssociationRepo associationRepo) {
-        return new ServiceAssociationImpl(associationRepo);
+    public AssociationService associationService(AssociationRepo associationRepo, OrganisationRepo organisationRepo) {
+        return new ServiceAssociationImpl(associationRepo, organisationRepo);
     }
 
 }

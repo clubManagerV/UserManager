@@ -1,8 +1,8 @@
 package de.club.usermanager.core.services;
 
 import de.club.usermanager.core.dto.UserDto;
-import de.club.usermanager.core.outport.UserRepo;
-import de.club.usermanager.core.outport.UserService;
+import de.club.usermanager.core.port.out.UserRepo;
+import de.club.usermanager.core.port.in.UserService;
 import jakarta.transaction.Transactional;
 
 

@@ -1,4 +1,4 @@
-package de.club.usermanager.core.outport;
+package de.club.usermanager.core.port.out;
 
 import de.club.usermanager.core.dto.UserDto;
 

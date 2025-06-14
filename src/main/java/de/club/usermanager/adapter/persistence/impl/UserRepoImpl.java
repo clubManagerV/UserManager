@@ -4,7 +4,7 @@ import de.club.usermanager.adapter.persistence.enties.User;
 import de.club.usermanager.adapter.persistence.repositories.AddressRepository;
 import de.club.usermanager.adapter.persistence.repositories.UserRepository;
 import de.club.usermanager.core.dto.UserDto;
-import de.club.usermanager.core.outport.UserRepo;
+import de.club.usermanager.core.port.out.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

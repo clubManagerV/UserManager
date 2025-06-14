@@ -2,8 +2,8 @@ package de.club.usermanager.core.services;
 
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.UserDto;
-import de.club.usermanager.core.outport.OrganisationRepo;
-import de.club.usermanager.core.outport.OrganisationService;
+import de.club.usermanager.core.port.out.OrganisationRepo;
+import de.club.usermanager.core.port.in.OrganisationService;
 import jakarta.transaction.Transactional;
 
 public class ServiceOrganisationImpl implements OrganisationService {
@@ -14,9 +14,12 @@ public class ServiceOrganisationImpl implements OrganisationService {
         this.organisationRepo = organisationRepo;
     }
 
+
     @Override
     @Transactional
     public void createOrganisation(String name, AddressDto address) {
+
+
       //TODO:
     }
 

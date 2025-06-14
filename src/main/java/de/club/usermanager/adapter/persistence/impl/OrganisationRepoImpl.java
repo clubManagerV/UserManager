@@ -5,22 +5,27 @@ import de.club.usermanager.adapter.persistence.enties.Organisation;
 import de.club.usermanager.adapter.persistence.repositories.AddressRepository;
 import de.club.usermanager.adapter.persistence.repositories.OrganisationRepository;
 import de.club.usermanager.core.dto.AddressDto;
-import de.club.usermanager.core.outport.OrganisationRepo;
+import de.club.usermanager.core.port.out.OrganisationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import static de.club.usermanager.adapter.persistence.mapper.MapToEntities.dtoToAddress;
 
 @Component
 public class OrganisationRepoImpl implements OrganisationRepo {
 
-
     private final OrganisationRepository organisationRepository;
+
     private final AddressRepository addressRepository;
+
 
     @Autowired
     public OrganisationRepoImpl(OrganisationRepository organisationRepository, AddressRepository addressRepository) {
         this.organisationRepository = organisationRepository;
         this.addressRepository = addressRepository;
     }
+
+
 
     @Override
     public void createOrganisation(String name, AddressDto address) {
@@ -39,16 +44,10 @@ public class OrganisationRepoImpl implements OrganisationRepo {
     @Override
     public void addAssociationToOrganisation(long AssociationId, long organisationId) {
         organisationRepository.findById(organisationId);
-
     }
 
-    private Address dtoToAddress(AddressDto addressDto) {
-        Address address = new Address();
-        address.setStreetName(addressDto.getStreetName());
-        address.setCity(addressDto.getCity());
-        address.setCountry(addressDto.getCountry());
-        address.setZipCode(addressDto.getZipCode());
-        address.setStreetNumber(addressDto.getStreetNumber());
-        return address;
+    @Override
+    public boolean organisationExist(long organisationId) {
+        return organisationRepository.existsById(organisationId);
     }
 }
