@@ -1,6 +1,8 @@
 package de.club.usermanager.adapter.controller;
 
+import de.club.usermanager.adapter.controller.mapper.AddressMapper;
 import de.club.usermanager.adapter.controller.mapper.UserMapper;
+import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.UserDto;
 import de.club.usermanager.core.port.in.UserService;
 import de.club.usermanager.feign.eventservice.ieventservice.IEventService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static de.club.usermanager.adapter.controller.mapper.MapToDtoHelper.mapAddressToDto;
 import static de.club.usermanager.adapter.persistence.enties.UserRole.USER;
 
 @RestController
@@ -33,8 +36,8 @@ private final IEventService ieventService;
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<UserMapper> createUser(@RequestBody UserMapper userMapper) {
-        UserDto userDto = userService.createUser(convertUserMapperToUserDto(userMapper));
+    public ResponseEntity<UserMapper> createUser(@RequestBody UserMapper userMapper, @RequestBody AddressMapper addressMapper) {
+        UserDto userDto = userService.createUser(convertUserMapperToUserDto(userMapper),  mapAddressToDto(addressMapper));
         return ResponseEntity.ok(convertUserDtoToUserMapper(userDto));
     }
 

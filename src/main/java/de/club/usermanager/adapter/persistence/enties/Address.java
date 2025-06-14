@@ -4,12 +4,9 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ADDRESSE", uniqueConstraints = {})
-public class Address {
+public class Address extends BaseEntity {
 
-    @Id
-    @Column(name = "ADDRESS_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+
 
     @Column(name = "STREET_NAME")
     private String streetName;
@@ -35,13 +32,6 @@ public class Address {
         this.streetName = streetName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public long getStreetNumber() {
         return streetNumber;

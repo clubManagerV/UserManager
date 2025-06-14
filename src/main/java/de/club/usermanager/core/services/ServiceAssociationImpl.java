@@ -7,8 +7,12 @@ import de.club.usermanager.core.port.out.AssociationRepo;
 import de.club.usermanager.core.port.in.AssociationService;
 import de.club.usermanager.core.port.out.OrganisationRepo;
 import jakarta.transaction.Transactional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ServiceAssociationImpl implements AssociationService {
+
+    private static final Logger logger = LogManager.getLogger(ServiceAssociationImpl.class);
 
     private final AssociationRepo associationRepo;
 
@@ -26,6 +30,7 @@ public class ServiceAssociationImpl implements AssociationService {
      boolean isOrganisationExist =  organisationRepo.organisationExist(organisationId);
 
      if (!isOrganisationExist) {
+         logger.error(" Organisation {} does not exist", organisationId);
          throw new NotFoundException(" Organisation with id " + organisationId + " does not exist");
      }
         associationRepo.createAssociation(name,address);

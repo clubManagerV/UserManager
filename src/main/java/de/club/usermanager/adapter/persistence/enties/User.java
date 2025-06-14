@@ -42,6 +42,20 @@ public class User extends BaseEntity{
     private List<Integer> eventIds;
 
 
+    @OneToOne
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
+    private Address address;
+
+
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public List<Integer> getEventIds() {
         return eventIds;
     }

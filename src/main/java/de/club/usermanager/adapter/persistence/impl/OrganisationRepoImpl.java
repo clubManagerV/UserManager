@@ -14,6 +14,7 @@ import static de.club.usermanager.adapter.persistence.mapper.MapToEntities.dtoTo
 @Component
 public class OrganisationRepoImpl implements OrganisationRepo {
 
+
     private final OrganisationRepository organisationRepository;
 
     private final AddressRepository addressRepository;
@@ -24,7 +25,6 @@ public class OrganisationRepoImpl implements OrganisationRepo {
         this.organisationRepository = organisationRepository;
         this.addressRepository = addressRepository;
     }
-
 
 
     @Override

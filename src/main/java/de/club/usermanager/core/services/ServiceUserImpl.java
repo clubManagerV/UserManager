@@ -1,5 +1,6 @@
 package de.club.usermanager.core.services;
 
+import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.UserDto;
 import de.club.usermanager.core.port.out.UserRepo;
 import de.club.usermanager.core.port.in.UserService;
@@ -16,7 +17,7 @@ public class ServiceUserImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto createUser(UserDto user) {
-        return userRepo.saveUser(user);
+    public UserDto createUser(UserDto user, AddressDto addressdto) {
+        return userRepo.saveUser(user,  addressdto);
     }
 }

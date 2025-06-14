@@ -22,6 +22,7 @@ public class AssociationRepoImpl implements AssociationRepo {
         this.associationRepository = associationRepository;
     }
 
+
     @Override
     public void createAssociation(String name, AddressDto address) {
         Association association = new Association();
