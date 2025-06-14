@@ -2,6 +2,8 @@ package de.club.usermanager.adapter.persistence.enties;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "ASSOCIATION", uniqueConstraints = {})
 public class Association extends BaseEntity {
@@ -10,12 +12,26 @@ public class Association extends BaseEntity {
  private String associationName;
 
  @OneToOne
- @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
+ @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
  private Address address;
 
  @ManyToOne
  @JoinColumn(name="ORGANISATION_ID", nullable=false)
  private Organisation organisation;
+
+
+ @ElementCollection
+ private List<Integer> adherents;
+
+
+
+ public List<Integer> getAdherents() {
+  return adherents;
+ }
+
+ public void setAdherents(List<Integer> adherents) {
+  this.adherents = adherents;
+ }
 
  public String getAssociationName() {
   return associationName;

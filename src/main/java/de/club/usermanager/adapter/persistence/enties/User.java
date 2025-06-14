@@ -43,7 +43,7 @@ public class User extends BaseEntity{
 
 
     @OneToOne
-    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ADDRESS_ID")
+    @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
     private Address address;
 
 
