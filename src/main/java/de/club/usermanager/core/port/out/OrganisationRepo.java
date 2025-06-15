@@ -1,10 +1,23 @@
 package de.club.usermanager.core.port.out;
 
 import de.club.usermanager.core.dto.AddressDto;
+import de.club.usermanager.core.dto.OrganisationDto;
 
 public interface OrganisationRepo {
-    void createOrganisation( String name, AddressDto address);
-    void  addAdminOrganisation(long organisationId, long user);
-    void addAssociationToOrganisation(long AssociationId, long organisationId);
-    boolean organisationExist(long organisationId);
+
+    void saveOrganisationByCreation(OrganisationDto organisationDto, AddressDto address);
+
+    void SaveOrganisationByUpdate(OrganisationDto organisationDto);
+
+    void addAssociationToOrganisation(OrganisationDto organisationDto,long AssociationId);
+
+    void addAdminUserToOrganisation(OrganisationDto organisationDto,long userId);
+
+    boolean organisationExist(OrganisationDto organisationDto);
+
+    void UpdateOrganisation(OrganisationDto organisation);
+
+    OrganisationDto getOrganisationById(long organisationId);
+ OrganisationDto getOrganisationByName(String organisationId);
+
 }

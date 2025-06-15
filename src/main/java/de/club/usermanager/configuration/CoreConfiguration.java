@@ -17,19 +17,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CoreConfiguration {
 
+
     @Bean
     public UserService userService(UserRepo userRepo) {
         return new ServiceUserImpl(userRepo);
     }
 
+
     @Bean
-    public OrganisationService organisationService(OrganisationRepo organisationRepo) {
-        return new ServiceOrganisationImpl(organisationRepo);
+    public OrganisationService organisationService(OrganisationRepo organisationRepo,
+                                                   UserRepo userRepo,
+                                                   AssociationRepo associationRepo) {
+        return new ServiceOrganisationImpl(organisationRepo,  userRepo, associationRepo);
     }
 
     @Bean
-    public AssociationService associationService(AssociationRepo associationRepo, OrganisationRepo organisationRepo) {
-        return new ServiceAssociationImpl(associationRepo, organisationRepo);
+    public AssociationService associationService(AssociationRepo associationRepo,
+                                                 OrganisationRepo organisationRepo,
+                                                 UserRepo userRepo) {
+        return new ServiceAssociationImpl(associationRepo, organisationRepo, userRepo);
     }
 
 }

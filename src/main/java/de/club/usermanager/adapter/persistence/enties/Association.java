@@ -24,7 +24,6 @@ public class Association extends BaseEntity {
  private List<Integer> adherents;
 
 
-
  public List<Integer> getAdherents() {
   return adherents;
  }

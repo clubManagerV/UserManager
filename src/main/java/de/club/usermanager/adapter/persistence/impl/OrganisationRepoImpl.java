@@ -5,11 +5,15 @@ import de.club.usermanager.adapter.persistence.enties.Organisation;
 import de.club.usermanager.adapter.persistence.repositories.AddressRepository;
 import de.club.usermanager.adapter.persistence.repositories.OrganisationRepository;
 import de.club.usermanager.core.dto.AddressDto;
+import de.club.usermanager.core.dto.OrganisationDto;
 import de.club.usermanager.core.port.out.OrganisationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 import static de.club.usermanager.adapter.persistence.mapper.MapToEntities.dtoToAddress;
+import static de.club.usermanager.adapter.persistence.mapper.MapToEntities.dtoToOrganisation;
 
 @Component
 public class OrganisationRepoImpl implements OrganisationRepo {
@@ -28,26 +32,50 @@ public class OrganisationRepoImpl implements OrganisationRepo {
 
 
     @Override
-    public void createOrganisation(String name, AddressDto address) {
+    public void saveOrganisationByCreation(OrganisationDto organisationDto, AddressDto address) {
         Organisation organisation = new Organisation();
-        organisation.setOrganisationName(name);
+        organisation.setOrganisationName(organisationDto.getOrganisationName());
         Address savedAddress = addressRepository.save(dtoToAddress(address));
         organisation.setAddress(savedAddress);
         organisationRepository.save(organisation);
     }
 
     @Override
-    public void addAdminOrganisation(long organisationId, long user) {
-        //TODO:
+    public void SaveOrganisationByUpdate(OrganisationDto organisationDto) {
+        Optional<Organisation> optionalOrganisation =  organisationRepository.findById(organisationDto.getId());
+        if (optionalOrganisation.isPresent()) {
+            Organisation organisation = dtoToOrganisation(organisationDto);
+            organisationRepository.save(organisation);
+        }
     }
 
     @Override
-    public void addAssociationToOrganisation(long AssociationId, long organisationId) {
-        organisationRepository.findById(organisationId);
+    public void addAssociationToOrganisation(OrganisationDto organisationDto, long AssociationId) {
+
     }
 
     @Override
-    public boolean organisationExist(long organisationId) {
-        return organisationRepository.existsById(organisationId);
+    public void addAdminUserToOrganisation(OrganisationDto organisationDto, long userId) {
+
+    }
+
+    @Override
+    public boolean organisationExist(OrganisationDto organisationDto) {
+        return organisationRepository.existsById(organisationDto.getId());
+    }
+
+    @Override
+    public void UpdateOrganisation(OrganisationDto organisation) {
+     //  organisationRepository.save(organisation);
+    }
+
+    @Override
+    public OrganisationDto getOrganisationById(long organisationId) {
+        return null;
+    }
+
+    @Override
+    public OrganisationDto getOrganisationByName(String organisationId) {
+        return null;
     }
 }

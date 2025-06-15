@@ -28,13 +28,14 @@ public class AssociationController {
     public ResponseEntity<Boolean> createAssociation(@RequestBody AddressMapper addressMapper,
                                                      @RequestParam String associationName,
                                                      @RequestParam long organisationId){
-        logger.info("Info level log example");
+        logger.info("association creating...");
          try {
            associationService.createAssociation(associationName, mapAddressToDto(addressMapper), organisationId);
        }catch (NotFoundException notFoundException) {
            logger.error("error creation: {}",notFoundException.getMessage());
            return ResponseEntity.internalServerError().build();
        }
+        logger.info("association is created");
         return ResponseEntity.ok().build();
     }
 

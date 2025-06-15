@@ -7,4 +7,5 @@ public interface UserRepo {
 
     UserDto saveUser(UserDto user, AddressDto addressdto);
 
+    UserDto findUserById(long id);
 }

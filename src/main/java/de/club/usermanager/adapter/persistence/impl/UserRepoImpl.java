@@ -34,6 +34,11 @@ public class UserRepoImpl implements UserRepo {
         return convertUserToUserDto(user);
     }
 
+    @Override
+    public UserDto findUserById(long id) {
+        return userRepository.findById(id).map(this::convertUserToUserDto).orElse(null);
+    }
+
     private  User getUserFromDto(UserDto userdto, Address address) {
         User user = new User();
         user.setFirstName(userdto.getFirstName());
