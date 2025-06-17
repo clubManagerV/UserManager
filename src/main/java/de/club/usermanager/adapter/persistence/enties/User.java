@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS", uniqueConstraints = {})
@@ -46,6 +47,8 @@ public class User extends BaseEntity{
     @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
     private Address address;
 
+    @ManyToMany
+    Set<Association> associationSet;
 
 
     public Address getAddress() {

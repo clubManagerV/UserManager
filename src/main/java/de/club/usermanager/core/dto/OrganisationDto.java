@@ -1,5 +1,6 @@
 package de.club.usermanager.core.dto;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class OrganisationDto {
@@ -13,8 +14,10 @@ public class OrganisationDto {
     private Set<AssociationDto> associationDtoSet;
 
 
-
     public Set<AssociationDto> getAssociationDtoSet() {
+        if (associationDtoSet == null) {
+            associationDtoSet = new HashSet<>();
+        }
         return associationDtoSet;
     }
 

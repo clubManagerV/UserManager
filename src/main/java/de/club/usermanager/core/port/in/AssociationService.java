@@ -2,12 +2,14 @@ package de.club.usermanager.core.port.in;
 
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.exceptions.NotFoundException;
+import de.club.usermanager.core.exceptions.NotPossibleOperationException;
 
 public interface AssociationService {
 
     void createAssociation( String name, AddressDto address, long organisationId) throws NotFoundException;
 
-    void  addManagerAssociation(long organisationId, long userId);
+    void addManagerAssociation(long associationId, long userId) throws NotFoundException, NotPossibleOperationException;
 
+    void addAdherentToAssociation(long associationId, long userId) throws NotFoundException;
 }
 

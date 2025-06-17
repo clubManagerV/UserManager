@@ -3,6 +3,7 @@ package de.club.usermanager.adapter.persistence.enties;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "ASSOCIATION", uniqueConstraints = {})
@@ -20,15 +21,14 @@ public class Association extends BaseEntity {
  private Organisation organisation;
 
 
- @ElementCollection
- private List<Integer> adherents;
+ @ManyToMany
+ Set<User> adherents;
 
-
- public List<Integer> getAdherents() {
+ public Set<User> getAdherents() {
   return adherents;
  }
 
- public void setAdherents(List<Integer> adherents) {
+ public void setAdherents(Set<User> adherents) {
   this.adherents = adherents;
  }
 

@@ -3,9 +3,13 @@ package de.club.usermanager.adapter.persistence.mapper;
 import de.club.usermanager.adapter.persistence.enties.Address;
 import de.club.usermanager.adapter.persistence.enties.Association;
 import de.club.usermanager.adapter.persistence.enties.Organisation;
+import de.club.usermanager.adapter.persistence.enties.User;
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.AssociationDto;
 import de.club.usermanager.core.dto.OrganisationDto;
+import de.club.usermanager.core.dto.UserDto;
+
+import java.util.Random;
 
 public class MapToEntities {
 
@@ -19,11 +23,12 @@ public class MapToEntities {
         return address;
     }
 
-    public static Association dtoToAssociation(AssociationDto associationDto ) {
+    public static Association dtoToAssociation(AssociationDto associationDto) {
         Association association = new Association();
         association.setAssociationName(associationDto.getAssociationName());
-        association.setAddress( dtoToAddress(associationDto.getAddressDto()));
-       // association.setManager(associationDto.getManageUser());
+        association.setAddress(dtoToAddress(associationDto.getAddressDto()));
+        for (UserDto userDto : associationDto.getAdherents())
+            association.getAdherents().add(dtoToUser(userDto));
         return association;
     }
 
@@ -31,8 +36,21 @@ public class MapToEntities {
         Organisation organisation = new Organisation();
         organisation.setOrganisationName(organisationDto.getOrganisationName());
         organisation.setAddress( dtoToAddress(organisationDto.getAddressDto()));
+        for (AssociationDto associationDto : organisationDto.getAssociationDtoSet())
+            organisation.getAssociation().add(dtoToAssociation(associationDto));
         return organisation;
     }
 
+    public static User dtoToUser(UserDto userdto) {
+        User user = new User();
+        user.setFirstName(userdto.getFirstName());
+        user.setLastName(userdto.getLastName());
+        user.setEmail(userdto.getEmail());
+        user.setPassword(userdto.getPassword());
+        user.setMemberNumber(3 + new Random().nextInt(10));
+        user.setRole(userdto.getUserRole());
+        user.setAddress(dtoToAddress(userdto.getAddressDto()));
+        return user;
+    }
 
 }

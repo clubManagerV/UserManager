@@ -49,7 +49,8 @@ public class ServiceOrganisationImpl implements OrganisationService {
        if (Objects.nonNull(userDto)
                && userDto.getUserRole().equals(SUPER_ADMIN_USER)
                && organisationExist) {
-          organisationRepo.addAdminUserToOrganisation(organisationDto, userid);
+
+          //organisationRepo.addAdminUserToOrganisation(organisationDto, userid);
        }
     }
 

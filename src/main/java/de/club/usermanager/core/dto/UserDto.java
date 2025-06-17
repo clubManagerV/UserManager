@@ -17,11 +17,17 @@ public class UserDto {
 
     private UserRole userRole;
 
+    private  AddressDto  addressDto;
 
-    public UserDto() {
 
+
+    public AddressDto getAddressDto() {
+        return addressDto;
     }
 
+    public void setAddressDto(AddressDto addressDto) {
+        this.addressDto = addressDto;
+    }
 
     public String getFirstName() {
         return firstName;

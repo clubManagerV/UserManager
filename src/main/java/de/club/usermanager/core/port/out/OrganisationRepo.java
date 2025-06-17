@@ -9,15 +9,12 @@ public interface OrganisationRepo {
 
     void SaveOrganisationByUpdate(OrganisationDto organisationDto);
 
-    void addAssociationToOrganisation(OrganisationDto organisationDto,long AssociationId);
-
-    void addAdminUserToOrganisation(OrganisationDto organisationDto,long userId);
-
     boolean organisationExist(OrganisationDto organisationDto);
 
     void UpdateOrganisation(OrganisationDto organisation);
 
     OrganisationDto getOrganisationById(long organisationId);
- OrganisationDto getOrganisationByName(String organisationId);
+
+    OrganisationDto getOrganisationByName(String organisationId);
 
 }

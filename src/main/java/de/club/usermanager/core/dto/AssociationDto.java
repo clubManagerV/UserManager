@@ -1,6 +1,10 @@
 package de.club.usermanager.core.dto;
 
 
+import de.club.usermanager.adapter.persistence.enties.User;
+
+import java.util.Set;
+
 public class AssociationDto {
 
     private Long id;
@@ -8,6 +12,12 @@ public class AssociationDto {
     private String associationName;
 
     private AddressDto addressDto;
+
+    private Set<UserDto> adherents;
+
+    public Set<UserDto> getAdherents() {
+        return adherents;
+    }
 
     private  long manageUser;
 

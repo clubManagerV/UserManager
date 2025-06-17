@@ -2,7 +2,9 @@ package de.club.usermanager.adapter.persistence.impl;
 
 import de.club.usermanager.adapter.persistence.enties.Address;
 import de.club.usermanager.adapter.persistence.enties.Organisation;
+import de.club.usermanager.adapter.persistence.mapper.MapToDto;
 import de.club.usermanager.adapter.persistence.repositories.AddressRepository;
+import de.club.usermanager.adapter.persistence.repositories.AssociationRepository;
 import de.club.usermanager.adapter.persistence.repositories.OrganisationRepository;
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.OrganisationDto;
@@ -40,6 +42,7 @@ public class OrganisationRepoImpl implements OrganisationRepo {
         organisationRepository.save(organisation);
     }
 
+
     @Override
     public void SaveOrganisationByUpdate(OrganisationDto organisationDto) {
         Optional<Organisation> optionalOrganisation =  organisationRepository.findById(organisationDto.getId());
@@ -49,15 +52,6 @@ public class OrganisationRepoImpl implements OrganisationRepo {
         }
     }
 
-    @Override
-    public void addAssociationToOrganisation(OrganisationDto organisationDto, long AssociationId) {
-
-    }
-
-    @Override
-    public void addAdminUserToOrganisation(OrganisationDto organisationDto, long userId) {
-
-    }
 
     @Override
     public boolean organisationExist(OrganisationDto organisationDto) {
@@ -65,17 +59,18 @@ public class OrganisationRepoImpl implements OrganisationRepo {
     }
 
     @Override
-    public void UpdateOrganisation(OrganisationDto organisation) {
-     //  organisationRepository.save(organisation);
+    public void UpdateOrganisation(OrganisationDto organisationDto) {
+      organisationRepository.save(dtoToOrganisation(organisationDto));
     }
 
     @Override
     public OrganisationDto getOrganisationById(long organisationId) {
-        return null;
+         Optional<Organisation> optionalOrganisation = organisationRepository.findById(organisationId);
+        return optionalOrganisation.map(MapToDto::toOrganisationDto).orElse(null);
     }
 
     @Override
-    public OrganisationDto getOrganisationByName(String organisationId) {
-        return null;
-    }
+    public OrganisationDto getOrganisationByName(String organisationName) {
+        Optional<Organisation> optionalOrganisation = organisationRepository.findByOrganisationName(organisationName);
+        return optionalOrganisation.map(MapToDto::toOrganisationDto).orElse(null);    }
 }
