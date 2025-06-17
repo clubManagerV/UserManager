@@ -2,6 +2,7 @@ package de.club.usermanager.adapter.controller;
 
 import de.club.usermanager.adapter.controller.mapper.AddressMapper;
 import de.club.usermanager.adapter.controller.mapper.UserMapper;
+import de.club.usermanager.adapter.controller.mapper.response.UserMapperResponse;
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.UserDto;
 import de.club.usermanager.core.port.in.UserService;
@@ -36,9 +37,9 @@ private final IEventService ieventService;
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<UserMapper> createUser(@RequestBody UserMapper userMapper, @RequestBody AddressMapper addressMapper) {
-        UserDto userDto = userService.createUser(convertUserMapperToUserDto(userMapper),  mapAddressToDto(addressMapper));
-        return ResponseEntity.ok(convertUserDtoToUserMapper(userDto));
+    public ResponseEntity<UserMapperResponse> createUser(@RequestBody UserMapper userMapper) {
+        UserDto userDto = userService.createUser(convertUserMapperToUserDto(userMapper));
+        return ResponseEntity.ok(convertUserDtoToUserMapper(userDto ));
     }
 
     @PostMapping(path = "userSubscribeEvent")
@@ -48,10 +49,15 @@ private final IEventService ieventService;
 
 
 
-
-
     private UserDto convertUserMapperToUserDto(UserMapper userMapper) {
         UserDto userDto = new UserDto();
+        AddressDto addressDto = new AddressDto();
+        addressDto.setStreetNumber(userMapper.streetNumber());
+        addressDto.setCity(userMapper.city());
+        addressDto.setCountry(userMapper.country());
+        addressDto.setZipCode(userMapper.zipCode());
+        userDto.setAddressDto(addressDto);
+
         userDto.setLastName(userMapper.lastName());
         userDto.setFirstName(userMapper.firstName());
         userDto.setEmail(userMapper.email());
@@ -60,9 +66,9 @@ private final IEventService ieventService;
         return userDto;
     }
 
-    private UserMapper convertUserDtoToUserMapper(UserDto userDto) {
+    private UserMapperResponse convertUserDtoToUserMapper(UserDto userDto) {
 
-        return new  UserMapper(userDto.getId(),
+        return new  UserMapperResponse(userDto.getId(),
                 userDto.getFirstName(),
                 userDto.getLastName(),
                 userDto.getEmail());

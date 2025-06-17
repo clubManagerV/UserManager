@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 public record UserMapper (
+
         @JsonProperty(value = "id", access = JsonProperty.Access.READ_ONLY)
         Long id,
 
@@ -14,7 +15,22 @@ public record UserMapper (
         String lastName,
 
         @JsonProperty(value = "email")
-        String email
+        String email,
+
+        @JsonProperty(value = "streetName")
+        String streetName,
+
+        @JsonProperty(value = "streetNumber")
+        long streetNumber,
+
+        @JsonProperty(value = "zipCode")
+        long zipCode,
+
+        @JsonProperty(value = "city")
+        String city,
+
+        @JsonProperty(value = "country")
+        String country
 )
 {
 

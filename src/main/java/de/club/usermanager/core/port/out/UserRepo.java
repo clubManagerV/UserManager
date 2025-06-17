@@ -5,7 +5,7 @@ import de.club.usermanager.core.dto.UserDto;
 
 public interface UserRepo {
 
-    UserDto saveUser(UserDto user, AddressDto addressdto);
+    UserDto saveUser(UserDto user);
 
     UserDto findUserById(long id);
 }

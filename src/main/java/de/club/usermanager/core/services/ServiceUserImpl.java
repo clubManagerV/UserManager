@@ -17,7 +17,7 @@ public class ServiceUserImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto createUser(UserDto user, AddressDto addressdto) {
-        return userRepo.saveUser(user,  addressdto);
+    public UserDto createUser(UserDto user) {
+        return userRepo.saveUser(user);
     }
 }

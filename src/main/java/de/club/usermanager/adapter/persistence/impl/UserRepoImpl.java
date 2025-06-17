@@ -19,7 +19,9 @@ import static de.club.usermanager.adapter.persistence.mapper.MapToEntities.dtoTo
 public class UserRepoImpl implements UserRepo {
 
     private final UserRepository userRepository;
+
     private final AddressRepository addressRepository;
+
 
     @Autowired
     public UserRepoImpl(UserRepository userRepository, AddressRepository addressRepository) {
@@ -28,8 +30,15 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public UserDto saveUser(UserDto userdto, AddressDto addressdto) {
-        Address address= addressRepository.save(dtoToAddress(addressdto));
+    public UserDto saveUser(UserDto userdto) {
+
+        Address addressToSave = new Address();
+        addressToSave.setStreetNumber(userdto.getAddressDto().getStreetNumber());
+        addressToSave.setCity(userdto.getAddressDto().getCity());
+        addressToSave.setCountry(userdto.getAddressDto().getCountry());
+        addressToSave.setZipCode(userdto.getAddressDto().getZipCode());
+
+        Address address = addressRepository.save(addressToSave);
         User user = userRepository.save(getUserFromDto(userdto, address));
         return convertUserToUserDto(user);
     }
