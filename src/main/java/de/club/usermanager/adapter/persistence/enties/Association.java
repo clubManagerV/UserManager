@@ -1,8 +1,8 @@
 package de.club.usermanager.adapter.persistence.enties;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,11 +16,11 @@ public class Association extends BaseEntity {
  @JoinColumn(name = "ADDRESS_ID", referencedColumnName = "ID")
  private Address address;
 
- @ManyToOne
+ @ManyToOne(cascade = CascadeType.MERGE)
  @JoinColumn(name="ORGANISATION_ID", nullable=false)
  private Organisation organisation;
 
-
+/*
  @ManyToMany
  Set<User> adherents;
 
@@ -30,7 +30,7 @@ public class Association extends BaseEntity {
 
  public void setAdherents(Set<User> adherents) {
   this.adherents = adherents;
- }
+ }*/
 
  public String getAssociationName() {
   return associationName;

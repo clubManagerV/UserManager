@@ -15,6 +15,7 @@ public class MapToEntities {
 
     public static Address dtoToAddress(AddressDto addressDto) {
         Address address = new Address();
+        address.setId(address.getId());
         address.setStreetName(addressDto.getStreetName());
         address.setCity(addressDto.getCity());
         address.setCountry(addressDto.getCountry());
@@ -27,13 +28,14 @@ public class MapToEntities {
         Association association = new Association();
         association.setAssociationName(associationDto.getAssociationName());
         association.setAddress(dtoToAddress(associationDto.getAddressDto()));
-        for (UserDto userDto : associationDto.getAdherents())
-            association.getAdherents().add(dtoToUser(userDto));
+       // for (UserDto userDto : associationDto.getAdherents())
+         //   association.getAdherents().add(dtoToUser(userDto));
         return association;
     }
 
     public static Organisation dtoToOrganisation(OrganisationDto organisationDto) {
         Organisation organisation = new Organisation();
+        organisation.setId(organisationDto.getId());
         organisation.setOrganisationName(organisationDto.getOrganisationName());
         organisation.setAddress( dtoToAddress(organisationDto.getAddressDto()));
         for (AssociationDto associationDto : organisationDto.getAssociationDtoSet())

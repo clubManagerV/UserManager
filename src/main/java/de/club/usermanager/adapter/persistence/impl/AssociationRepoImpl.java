@@ -1,7 +1,9 @@
 package de.club.usermanager.adapter.persistence.impl;
 
+import de.club.usermanager.adapter.persistence.enties.Address;
 import de.club.usermanager.adapter.persistence.enties.Association;
 import de.club.usermanager.adapter.persistence.mapper.MapToDto;
+import de.club.usermanager.adapter.persistence.repositories.AddressRepository;
 import de.club.usermanager.adapter.persistence.repositories.AssociationRepository;
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.AssociationDto;
@@ -22,19 +24,22 @@ public class AssociationRepoImpl implements AssociationRepo {
 
     private final AssociationRepository associationRepository;
 
+    private final AddressRepository addressRepository;
 
     @Autowired
-    public AssociationRepoImpl(AssociationRepository associationRepository) {
+    public AssociationRepoImpl(AssociationRepository associationRepository, AddressRepository addressRepository) {
         this.associationRepository = associationRepository;
+        this.addressRepository = addressRepository;
     }
 
 
     @Override
-    public void createAssociation(String name, AddressDto address, OrganisationDto organisationId) {
+    public void createAssociation(String name, AddressDto address, OrganisationDto organisationDto) {
         Association association = new Association();
         association.setAssociationName(name);
-        association.setAddress(dtoToAddress(address));
-        association.setOrganisation(dtoToOrganisation(organisationId));
+        association.setOrganisation(dtoToOrganisation(organisationDto));
+        Address savedAddress = addressRepository.save(dtoToAddress(address));
+        association.setAddress(savedAddress);
         associationRepository.save(association);
     }
 

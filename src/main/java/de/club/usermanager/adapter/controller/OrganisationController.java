@@ -19,8 +19,8 @@ public class OrganisationController {
     private static final Logger logger = LogManager.getLogger(OrganisationService.class);
 
     @Autowired
-    public OrganisationController(OrganisationService oganisationService) {
-        this.organisationService = oganisationService;
+    public OrganisationController(OrganisationService organisationService) {
+        this.organisationService = organisationService;
     }
 
     @PostMapping(path = "create")

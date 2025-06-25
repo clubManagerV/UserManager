@@ -3,9 +3,9 @@ package de.club.usermanager.adapter.persistence.enties;
 // an organisation has more than one association
 import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import static de.club.usermanager.adapter.persistence.enties.UserRole.SUPER_ADMIN_USER;
 
 @Entity
 @Table(name = "ORGANISATION", uniqueConstraints = {})
@@ -19,25 +19,11 @@ public class Organisation  extends BaseEntity {
     private Address address;
 
 
-    @OneToMany(mappedBy= "organisation")
-    private Set<Association> association;
+    @OneToMany(mappedBy= "organisation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Association> association = new HashSet<>();
 
 
-    @OneToOne
-    @JoinColumn(name = "SUPER_ADMIN_USER", referencedColumnName = "ID")
-    private User getSuperAdminUser;
 
-
-    public User getGetSuperAdminUser() {
-        return getSuperAdminUser;
-    }
-
-
-    public void setGetSuperAdminUser(User user) {
-        if(user.getRole().equals(SUPER_ADMIN_USER)){
-            this.getSuperAdminUser = user;
-        }
-    }
 
     public String getOrganisationName() {
         return organisationName;
