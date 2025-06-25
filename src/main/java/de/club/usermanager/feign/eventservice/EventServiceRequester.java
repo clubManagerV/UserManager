@@ -16,8 +16,23 @@ public class EventServiceRequester implements IEventService {
         this.eventInterface = eventInterface;
     }
 
-
     @Override
     public boolean addEventTUser(long user, long event) {
-        return eventInterface.addUserToEvent(user, event);    }
+        return eventInterface.addUserToEvent(user, event);
+    }
+
+    @Override
+    public boolean removeEventTUser(long user, long event) {
+        return eventInterface.removeEventTUser(user, event);
+    }
+
+    @Override
+    public boolean addEventToAssociation(long eventId, long associationId) {
+        return eventInterface.addEventToAssociation(eventId, associationId);
+    }
+
+    @Override
+    public boolean removeEventToAssociation(long eventId, long associationId) {
+        return eventInterface.removeEventToAssociation(eventId, associationId);
+    }
 }

@@ -13,7 +13,19 @@ public interface EventInterface {
     public boolean addUserToEvent(@RequestParam long userId, @RequestParam long eventId);
 
 
+    @PostMapping("club/removeUserToEvent")
+    public boolean removeEventTUser(@RequestParam long userId, @RequestParam long eventId);
+
+
+    @PostMapping("club/addEventToAssociation")
+    public boolean addEventToAssociation(@RequestParam long userId, @RequestParam long eventId);
+
+
+    @PostMapping("club/removeEventToAssociation")
+    public boolean removeEventToAssociation(@RequestParam long userId, @RequestParam long eventId);
+
+
     //@GetMapping("removeUserToEvent")
-   // public boolean removeUserToEvent(long userId, long eventId);
+    // public boolean removeUserToEvent(long userId, long eventId);
 
 }

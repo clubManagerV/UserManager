@@ -3,6 +3,7 @@ package de.club.usermanager.adapter.controller;
 import de.club.usermanager.adapter.controller.mapper.AddressMapper;
 import de.club.usermanager.core.exceptions.NotFoundException;
 import de.club.usermanager.core.port.in.AssociationService;
+import de.club.usermanager.feign.eventservice.ieventservice.IEventService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,12 @@ public class AssociationController {
 
     private static final Logger logger = LogManager.getLogger(AssociationController.class);
      private final AssociationService associationService;
-
+    private final IEventService ieventService;
      @Autowired
-    public AssociationController(AssociationService associationService) {
+    public AssociationController(AssociationService associationService, IEventService ieventService) {
         this.associationService = associationService;
-    }
+         this.ieventService = ieventService;
+     }
 
 
     @PostMapping(path = "create")
@@ -39,5 +41,13 @@ public class AssociationController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping(path = "addEventToAssociation")
+    public ResponseEntity<Boolean> addEventToAssociation(@RequestParam long eventId, @RequestParam long associationId) {
+        return ResponseEntity.ok(ieventService.addEventToAssociation(eventId, associationId));
+    }
 
+    @PostMapping(path = "removeEventToAssociation")
+    public ResponseEntity<Boolean> removeEventToAssociation(@RequestParam long eventId, @RequestParam long associationId) {
+        return ResponseEntity.ok(ieventService.removeEventToAssociation(eventId, associationId));
+    }
 }

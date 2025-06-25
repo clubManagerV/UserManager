@@ -22,14 +22,14 @@ import static de.club.usermanager.adapter.persistence.enties.UserRole.USER;
 public class UserController {
 
 
-private final UserService userService;
-private final IEventService ieventService;
+    private final UserService userService;
+    private final IEventService ieventService;
 
-@Autowired
+    @Autowired
     public UserController(UserService userService, IEventService ieventService) {
         this.userService = userService;
-    this.ieventService = ieventService;
-}
+        this.ieventService = ieventService;
+    }
 
 
     @PostMapping(
@@ -39,13 +39,19 @@ private final IEventService ieventService;
     )
     public ResponseEntity<UserMapperResponse> createUser(@RequestBody UserMapper userMapper) {
         UserDto userDto = userService.createUser(convertUserMapperToUserDto(userMapper));
-        return ResponseEntity.ok(convertUserDtoToUserMapper(userDto ));
+        return ResponseEntity.ok(convertUserDtoToUserMapper(userDto));
     }
 
     @PostMapping(path = "userSubscribeEvent")
     public ResponseEntity<Boolean> addEventUser(@RequestParam long userId, @RequestParam long eventId) {
         return ResponseEntity.ok(ieventService.addEventTUser(userId, eventId));
     }
+
+    @PostMapping(path = "userUnSubscribeEvent")
+    public ResponseEntity<Boolean> removeEventToUser(@RequestParam long userId, @RequestParam long eventId) {
+        return ResponseEntity.ok(ieventService.removeEventTUser(userId, eventId));
+    }
+
 
 
 
@@ -68,7 +74,7 @@ private final IEventService ieventService;
 
     private UserMapperResponse convertUserDtoToUserMapper(UserDto userDto) {
 
-        return new  UserMapperResponse(userDto.getId(),
+        return new UserMapperResponse(userDto.getId(),
                 userDto.getFirstName(),
                 userDto.getLastName(),
                 userDto.getEmail());
