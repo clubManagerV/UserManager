@@ -8,14 +8,12 @@ import de.club.usermanager.adapter.persistence.repositories.AssociationRepositor
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.AssociationDto;
 import de.club.usermanager.core.dto.OrganisationDto;
-import de.club.usermanager.core.dto.UserDto;
 import de.club.usermanager.core.port.out.AssociationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-import static de.club.usermanager.adapter.persistence.mapper.MapToDto.toAssociationDto;
 import static de.club.usermanager.adapter.persistence.mapper.MapToEntities.*;
 
 @Component
@@ -55,5 +53,10 @@ public class AssociationRepoImpl implements AssociationRepo {
     public void saveAssociation(AssociationDto association) {
         associationRepository.save(dtoToAssociation(association));
 
+    }
+
+    @Override
+    public void deleteAssociation(long id) {
+        associationRepository.deleteById(id);
     }
 }

@@ -4,7 +4,6 @@ import de.club.usermanager.adapter.persistence.enties.Address;
 import de.club.usermanager.adapter.persistence.enties.Organisation;
 import de.club.usermanager.adapter.persistence.mapper.MapToDto;
 import de.club.usermanager.adapter.persistence.repositories.AddressRepository;
-import de.club.usermanager.adapter.persistence.repositories.AssociationRepository;
 import de.club.usermanager.adapter.persistence.repositories.OrganisationRepository;
 import de.club.usermanager.core.dto.AddressDto;
 import de.club.usermanager.core.dto.OrganisationDto;
@@ -45,32 +44,29 @@ public class OrganisationRepoImpl implements OrganisationRepo {
 
     @Override
     public void SaveOrganisationByUpdate(OrganisationDto organisationDto) {
-        Optional<Organisation> optionalOrganisation =  organisationRepository.findById(organisationDto.getId());
+        Optional<Organisation> optionalOrganisation = organisationRepository.findById(organisationDto.getId());
         if (optionalOrganisation.isPresent()) {
             Organisation organisation = dtoToOrganisation(organisationDto);
             organisationRepository.save(organisation);
         }
     }
 
-
     @Override
     public boolean organisationExist(OrganisationDto organisationDto) {
         return organisationRepository.existsById(organisationDto.getId());
     }
 
-    @Override
-    public void UpdateOrganisation(OrganisationDto organisationDto) {
-      organisationRepository.save(dtoToOrganisation(organisationDto));
-    }
 
     @Override
     public OrganisationDto getOrganisationById(long organisationId) {
-         Optional<Organisation> optionalOrganisation = organisationRepository.findById(organisationId);
+        Optional<Organisation> optionalOrganisation = organisationRepository.findById(organisationId);
         return optionalOrganisation.map(MapToDto::toOrganisationDto).orElse(null);
     }
 
+
     @Override
-    public OrganisationDto getOrganisationByName(String organisationName) {
-        Optional<Organisation> optionalOrganisation = organisationRepository.findByOrganisationName(organisationName);
-        return optionalOrganisation.map(MapToDto::toOrganisationDto).orElse(null);    }
+    public void deleteOrganisationById(long organisationId) {
+        organisationRepository.deleteById(organisationId);
+    }
+
 }

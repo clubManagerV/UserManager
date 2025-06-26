@@ -74,11 +74,36 @@ public class ServiceAssociationImpl implements AssociationService {
         AssociationDto associationDto = associationRepo.getAssociationById(associationId);
         UserDto userDto = userRepo.findUserById(userId);
 
-        if(Objects.nonNull(associationDto) && Objects.nonNull(userDto)) {
+        if (Objects.nonNull(associationDto) && Objects.nonNull(userDto)) {
             associationDto.getAdherents().add(userDto);
-        }else{
-            throw new NotFoundException(" Association with id " + associationId + " does not exist");
+        } else {
+            throw new NotFoundException("Association with id " + associationId + " does not exist");
         }
+    }
 
+    @Override
+    @Transactional
+    public void deleteAssociation(long associationId) throws NotFoundException {
+        AssociationDto associationDto = associationRepo.getAssociationById(associationId);
+        if (Objects.nonNull(associationDto)) {
+            associationRepo.deleteAssociation(associationId);
+        } else {
+            throw new NotFoundException("Association with id " + associationId + " does not exist");
+        }
+    }
+
+
+    @Override
+    @Transactional
+    public void removeAdherentAssociation(long associationId, long userId) throws NotFoundException {
+
+        AssociationDto associationDto = associationRepo.getAssociationById(associationId);
+        UserDto userDto = userRepo.findUserById(userId);
+
+        if (Objects.nonNull(associationDto) && Objects.nonNull(userDto)) {
+            associationDto.getAdherents().remove(userDto);
+        } else {
+            throw new NotFoundException("Association with id " + associationId + " does not exist");
+        }
     }
 }

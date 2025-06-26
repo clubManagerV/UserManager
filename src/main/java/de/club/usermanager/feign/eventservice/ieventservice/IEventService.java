@@ -6,6 +6,8 @@ public interface IEventService {
 
     boolean removeEventTUser(long user, long event) ;
 
-    boolean addEventToAssociation(long eventId, long association) ;
-    boolean removeEventToAssociation(long eventId, long association) ;
+    boolean addEventToAssociation(long eventId, long association);
+
+    boolean removeEventToAssociation(long eventId, long association);
+
     }

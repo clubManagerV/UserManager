@@ -11,10 +11,7 @@ public interface OrganisationRepo {
 
     boolean organisationExist(OrganisationDto organisationDto);
 
-    void UpdateOrganisation(OrganisationDto organisation);
-
     OrganisationDto getOrganisationById(long organisationId);
 
-    OrganisationDto getOrganisationByName(String organisationId);
-
+    void deleteOrganisationById(long organisationId);
 }

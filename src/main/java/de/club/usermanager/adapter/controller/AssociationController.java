@@ -17,37 +17,72 @@ import static de.club.usermanager.adapter.controller.mapper.MapToDtoHelper.mapAd
 public class AssociationController {
 
     private static final Logger logger = LogManager.getLogger(AssociationController.class);
-     private final AssociationService associationService;
+    private final AssociationService associationService;
     private final IEventService ieventService;
-     @Autowired
+
+    @Autowired
     public AssociationController(AssociationService associationService, IEventService ieventService) {
         this.associationService = associationService;
-         this.ieventService = ieventService;
-     }
+        this.ieventService = ieventService;
+    }
 
 
     @PostMapping(path = "create")
     public ResponseEntity<Boolean> createAssociation(@RequestBody AddressMapper addressMapper,
                                                      @RequestParam String associationName,
-                                                     @RequestParam long organisationId){
+                                                     @RequestParam long organisationId) {
         logger.info("association creating...");
-         try {
-           associationService.createAssociation(associationName, mapAddressToDto(addressMapper), organisationId);
-       }catch (NotFoundException notFoundException) {
-           logger.error("error creation: {}",notFoundException.getMessage());
-           return ResponseEntity.internalServerError().build();
-       }
+        try {
+            associationService.createAssociation(associationName, mapAddressToDto(addressMapper), organisationId);
+        } catch (NotFoundException notFoundException) {
+            logger.error("error creation: {}", notFoundException.getMessage());
+            return ResponseEntity.internalServerError().build();
+        }
         logger.info("association is created");
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping(path = "addEventToAssociation")
+    @PostMapping(path = "addEvent")
     public ResponseEntity<Boolean> addEventToAssociation(@RequestParam long eventId, @RequestParam long associationId) {
         return ResponseEntity.ok(ieventService.addEventToAssociation(eventId, associationId));
     }
 
-    @PostMapping(path = "removeEventToAssociation")
+    @PostMapping(path = "removeEvent")
     public ResponseEntity<Boolean> removeEventToAssociation(@RequestParam long eventId, @RequestParam long associationId) {
         return ResponseEntity.ok(ieventService.removeEventToAssociation(eventId, associationId));
     }
+
+    @PostMapping(path = "addAdherent")
+    public ResponseEntity<Boolean> addAdherentToAssociation(@RequestParam long userId, @RequestParam long associationId) {
+        try {
+            associationService.addAdherentToAssociation(associationId, userId);
+        } catch (NotFoundException e) {
+            logger.info("user {} or association {} does not exist", userId, associationId);
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping(path = "removeAdherent")
+    public ResponseEntity<Boolean> removeAdherentToAssociation(@RequestParam long userId, @RequestParam long associationId) {
+        try {
+            associationService.removeAdherentAssociation(associationId, userId);
+        } catch (NotFoundException e) {
+            logger.info("user {} or association {} does not exist and cannot be removed", userId, associationId);
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping(path = "delete")
+    public ResponseEntity<Boolean> deleteAssociation(@RequestParam long associationId) {
+        try {
+            associationService.deleteAssociation(associationId);
+        } catch (NotFoundException e) {
+            logger.info("association {} does not exist and cannot be deleted", associationId);
+            return ResponseEntity.internalServerError().build();
+        }
+        return ResponseEntity.ok().build();
+    }
+
 }

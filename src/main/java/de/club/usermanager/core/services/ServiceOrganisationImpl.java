@@ -19,9 +19,9 @@ public class ServiceOrganisationImpl implements OrganisationService {
 
     private final OrganisationRepo organisationRepo;
 
-    private  final UserRepo userRepo;
+    private final UserRepo userRepo;
 
-    private  final AssociationRepo associationRepo;
+    private final AssociationRepo associationRepo;
 
 
     public ServiceOrganisationImpl(OrganisationRepo organisationRepo, UserRepo userRepo, AssociationRepo associationRepo) {
@@ -43,30 +43,65 @@ public class ServiceOrganisationImpl implements OrganisationService {
     @Override
     @Transactional
     public void addAdminOrganisation(long organisationId, long userid) {
-       UserDto userDto = userRepo.findUserById(userid);
-        OrganisationDto organisationDto= organisationRepo.getOrganisationById(organisationId);
-      boolean organisationExist = organisationRepo.organisationExist(organisationDto);
-       if (Objects.nonNull(userDto)
-               && userDto.getUserRole().equals(SUPER_ADMIN_USER)
-               && organisationExist) {
+        UserDto userDto = userRepo.findUserById(userid);
+        OrganisationDto organisationDto = organisationRepo.getOrganisationById(organisationId);
+        boolean organisationExist = organisationRepo.organisationExist(organisationDto);
+        if (Objects.nonNull(userDto)
+                && userDto.getUserRole().equals(SUPER_ADMIN_USER)
+                && organisationExist) {
 
-          //organisationRepo.addAdminUserToOrganisation(organisationDto, userid);
-       }
+            //organisationRepo.addAdminUserToOrganisation(organisationDto, userid);
+        }
     }
 
     @Override
     @Transactional
     public void addAssociationToOrganisation(long associationId, long organisationId) throws NotFoundException {
 
-        OrganisationDto organisationDto= organisationRepo.getOrganisationById(organisationId);
+        OrganisationDto organisationDto = organisationRepo.getOrganisationById(organisationId);
         AssociationDto associationDto = associationRepo.getAssociationById(associationId);
-        if (Objects.nonNull(organisationDto) && Objects.nonNull(associationDto)){
+        if (Objects.nonNull(organisationDto) && Objects.nonNull(associationDto)) {
             organisationDto.getAssociationDtoSet().add(associationDto);
             organisationRepo.SaveOrganisationByUpdate(organisationDto);
-        }else {
-            throw  new NotFoundException(" Organisation or Association Not Found");
+        } else {
+            throw new NotFoundException(" Organisation or Association Not Found");
         }
     }
 
 
+    @Override
+    @Transactional
+    public void removeAssociationFromOrganisation(long associationId, long organisationId) throws NotFoundException {
+        OrganisationDto organisationDto = organisationRepo.getOrganisationById(organisationId);
+        AssociationDto associationDto = associationRepo.getAssociationById(associationId);
+        if (Objects.nonNull(organisationDto) && Objects.nonNull(associationDto)) {
+            organisationDto.getAssociationDtoSet().remove(associationDto);
+            organisationRepo.SaveOrganisationByUpdate(organisationDto);
+        } else {
+            throw new NotFoundException(" Organisation or Association Not Found");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteOrganisation(long organisationId) throws NotFoundException {
+        OrganisationDto organisationDto = organisationRepo.getOrganisationById(organisationId);
+        if (Objects.nonNull(organisationDto)) {
+            organisationRepo.deleteOrganisationById(organisationId);
+        } else {
+            throw new NotFoundException("Organisation Not Found");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void updateOrganisationAddress(long organisationId, AddressDto address) throws NotFoundException {
+        OrganisationDto organisationDto = organisationRepo.getOrganisationById(organisationId);
+        if (Objects.nonNull(organisationDto)) {
+            organisationDto.setAddressDto(address);
+            organisationRepo.SaveOrganisationByUpdate(organisationDto);
+        } else {
+            throw new NotFoundException("Organisation Not Found");
+        }
+    }
 }

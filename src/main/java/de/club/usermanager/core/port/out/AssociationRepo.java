@@ -11,4 +11,6 @@ public interface AssociationRepo {
     AssociationDto getAssociationById(long id);
 
     void saveAssociation(AssociationDto association);
+
+    void deleteAssociation(long id);
 }

@@ -12,8 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Random;
 
-import static de.club.usermanager.adapter.persistence.mapper.MapToEntities.dtoToAddress;
-
 
 @Component
 public class UserRepoImpl implements UserRepo {
@@ -48,7 +46,13 @@ public class UserRepoImpl implements UserRepo {
         return userRepository.findById(id).map(this::convertUserToUserDto).orElse(null);
     }
 
-    private  User getUserFromDto(UserDto userdto, Address address) {
+    @Override
+    public void deleteUser(long userId) {
+        userRepository.deleteById(userId);
+    }
+
+
+    private User getUserFromDto(UserDto userdto, Address address) {
         User user = new User();
         user.setFirstName(userdto.getFirstName());
         user.setLastName(userdto.getLastName());

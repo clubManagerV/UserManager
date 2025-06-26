@@ -23,7 +23,9 @@ public class UserController {
 
 
     private final UserService userService;
+
     private final IEventService ieventService;
+
 
     @Autowired
     public UserController(UserService userService, IEventService ieventService) {
